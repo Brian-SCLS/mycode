@@ -1,7 +1,7 @@
 # mycode (Project Title)
 
 One Paragraph of your project description goes here. Describe what you're trying to do.
-What is the purpose of putting up this repo?  To keep track of my Python training lab work.
+What is the purpose of putting up this repo?  To keep track of my Python training lab work. I want to learn how to version control projects with git.
 
 ## Getting Started
 
