@@ -25,7 +25,7 @@ def main():
         elif guess_num == 9:
             print("Oh no!  You only have one guess left.")
         elif guess_num == 10:
-            print("Ganme Over! You're not very good at guessing are you?")
+            print("\nGame Over! You're not very good at guessing are you?")
             break
 
         if user_guess_int < num_picked:
