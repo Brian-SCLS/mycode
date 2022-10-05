@@ -20,13 +20,19 @@ def main():
     # create resp, which is our request object
     data = requests.get(API).json()
 
-    print("data: ", data)
-    print("")
+    #print("data: ", data)
+    #print("")
 
-    for questions in data.get("results"):
-        print(questions)
+    for questions_dict in data.get("results"):
+        #print(questions_dict)
         print("")
-        print(questions["question"])
+        print(questions_dict["question"])
+        print("")
+        print(questions_dict["incorrect_answers"])
+        print("")
+        print(questions_dict["correct_answer"])
+
+
 
 if __name__ == "__main__":
     main()
