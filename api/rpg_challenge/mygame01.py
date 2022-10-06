@@ -14,11 +14,8 @@ def showInstructions():
       look [examine your surroundings]
       q [quit]
 
-    To win the game:
-      1) Find the rare key.
-      2) Find the potion.
-      3) Avoid the monsters!
-      4) Find the Garden.
+    To win the game you will need to find the key and the potion.  Then make your
+    way to the Garden and don't get killed by the monsters.
       ''')
 
 def showStatus():
@@ -30,7 +27,14 @@ def showStatus():
     print('Inventory:', inventory)
     # check if there's an item in the room, if so print it
     if "item" in rooms[currentRoom]:
-      print('You see a ' + rooms[currentRoom]['item'])
+        if type(rooms[currentRoom]['item']) == list:
+            if len(rooms[currentRoom]['item']) > 1:
+                print('You see a ' + rooms[currentRoom]['item'][0] +
+                        ' and a ' + rooms[currentRoom]['item'][1])
+            else:
+                print('You see a ' + rooms[currentRoom]['item'][0])
+        else:
+            print('You see a ' + rooms[currentRoom]['item'])
     print("---------------------------")
 
 
@@ -43,7 +47,7 @@ rooms = {
             'Hall' : {
                   'south' : 'Kitchen',
                   'east'  : 'Dining Room',
-                  'item'  : 'key',
+                  'item'  : ['key','hat'],
                   'look'  : 'The hall is dusty and full of cobwebs.\nYou can go east or south.'
                 },
 
@@ -105,8 +109,14 @@ while True:
             inventory.append(move[1])
             #display a helpful message
             print(move[1] + ' got!')
-            #delete the item key:value pair from the room's dictionary
-            del rooms[currentRoom]['item']
+            if type(rooms[currentRoom]['item']) == list:
+                #delete the item list item from the item list
+                rooms[currentRoom]['item'].remove(move[1])
+                if len(rooms[currentRoom]['item']) == 0:
+                    del rooms[currentRoom]['item']
+            else:
+                #delete the item key:value pair from the room's dictionary
+                del rooms[currentRoom]['item']
         # if there's no item in the room or the item doesn't match
         else:
             #tell them they can't get it
