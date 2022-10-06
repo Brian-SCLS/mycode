@@ -20,8 +20,6 @@ def hosts():
     return render_template("hosts.j2", groups=groups)
 
 
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=2224)
 
