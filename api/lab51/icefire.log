@@ -1,0 +1,9 @@
+INFO:10/07/2022 05:06:29 PM Scripting started
+CRITICAL:10/07/2022 05:06:29 PM can only concatenate str (not "NoneType") to str
+INFO:10/07/2022 05:06:29 PM Program ended
+INFO:10/07/2022 05:07:21 PM Scripting started
+INFO:10/07/2022 05:07:22 PM API Response Code - <Response [200]>
+INFO:10/07/2022 05:07:22 PM Program ended
+INFO:10/07/2022 05:07:36 PM Scripting started
+INFO:10/07/2022 05:07:36 PM API Response Code - <Response [200]>
+INFO:10/07/2022 05:07:36 PM Program ended
