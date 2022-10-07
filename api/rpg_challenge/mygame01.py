@@ -47,19 +47,26 @@ rooms = {
             'Hall' : {
                   'south' : 'Kitchen',
                   'east'  : 'Dining Room',
-                  'item'  : ['key','hat'],
-                  'look'  : 'The hall is dusty and full of cobwebs.\nYou can go east or south.'
+                  'west'  : 'Closet',
+                  'item'  : 'key',
+                  'look'  : 'The hall is dusty and full of cobwebs.\nTo the west you see a small closet. \nTo the east you a room with a table in it. \nYou hear some rustling in the room to the south.'
+                },
+
+            'Closet' : {
+                  'east' : 'Hall',
+                  'item' : 'hat',
+                  'look' : 'You see a red fedora on the shelf.'
                 },
 
             'Kitchen' : {
                   'north' : 'Hall',
-                  'item'  : 'monster'
+                  'item'  : 'large, hairy monster'
                 },
 
             'Dining Room' : {
                   'west' : 'Hall',
                   'south': 'Garden',
-                  'item' : 'potion',
+                  'item' : ['potion', 'rusty butter knife'],
                   'look' : 'The room contains a large oak table with six chairs around it.\nYou can go west or south.'
                 },
             'Garden' : {
@@ -68,6 +75,11 @@ rooms = {
                 }
 
          }
+
+# initialize variables
+global move_cntr
+move_cntr = 0
+hat_on_head = False
 
 # start the player in the Hall
 currentRoom = 'Hall'
@@ -95,6 +107,8 @@ while True:
         if move[1] in rooms[currentRoom]:
             #set the current room to the new room
             currentRoom = rooms[currentRoom][move[1]]
+            # increment the player's move counter
+            move_cntr += 1
         # if they aren't allowed to go that way:
         else:
             print('You can\'t go that way!')
@@ -122,17 +136,37 @@ while True:
             #tell them they can't get it
             print('Can\'t get ' + move[1] + '!')
 
+    #if they type 'look' first
     if move[0] == 'look':
         print(rooms[currentRoom]['look'])
 
+    #if they type 'use' first
+    if move[0] == 'use':
+        if move[1] in inventory:
+            if move[1] == 'hat':
+                hat_on_head = True
+                print('You put the red fedora on your head.\nYou look really dapper now!')
+        else:
+            print("You don't have a " + move[1] + '.')
+
+    #if they type 'q' first
     if move[0] == 'q':
-        print('\nSorry to see you go. BYE!\n')
+        if move_cntr == 0:
+            print("\nYou didn't make any moves. Were you scared stiff?")
+        elif move_cntr == 1:
+            print('\nYou only made 1 move. You need to explore more.')
+        else:
+            print('\nYou made ' + str(move_cntr) + ' moves.')
+        print('Sorry to see you go. BYE!\n')
         break
 
     ## If a player enters a room with a monster
     if 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom]['item']:
-        print('A monster has got you... GAME OVER!')
-        break
+        if hat_on_head:
+            print('A large, hairy monster runs away in fear of your red fedora.')
+        else:
+            print('A large, hairy monster ate you... GAME OVER!')
+            break
 
     ## Define how a player can win
     if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
